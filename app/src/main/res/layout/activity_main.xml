@@ -1,0 +1,201 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Valores -->
+    <TextView
+        android:id="@+id/txvValor1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Valor 1"
+        android:textColor="#C62828"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edtValor1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:hint="Digite o valor"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txvValor1" />
+
+    <TextView
+        android:id="@+id/txvValor2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Valor 2"
+        android:textColor="#C62828"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edtValor1" />
+
+    <EditText
+        android:id="@+id/edtValor2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:hint="Digite o valor"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txvValor2" />
+
+    <!-- Primeira linha de botões -->
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edtValor2">
+
+        <Button android:id="@+id/btnSomar" style="@style/CalcButton" android:text="+" />
+        <Button android:id="@+id/btnSubtrair" style="@style/CalcButton" android:text="-" />
+        <Button android:id="@+id/btnMultiplicar" style="@style/CalcButton" android:text="*" />
+        <Button android:id="@+id/btnDividir" style="@style/CalcButton" android:text="/" />
+        <Button android:id="@+id/btnLimpar" style="@style/CalcButton" android:text="C" />
+    </LinearLayout>
+
+    <!-- Segunda linha de botões -->
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout">
+
+        <Button
+            android:id="@+id/btnMemoMais"
+            style="@style/CalcButton"
+            android:text="M+" />
+
+        <Button
+            android:id="@+id/btnMemoMenos"
+            style="@style/CalcButton"
+            android:text="M-" />
+
+        <Button
+            android:id="@+id/btnMemoRec"
+            style="@style/CalcButton"
+            android:text="MR" />
+
+        <Button
+            android:id="@+id/btnMemoClear"
+            style="@style/CalcButton"
+            android:text="MC" />
+        <Button android:id="@+id/btnMemoriaHist" style="@style/CalcButton" android:text="MH" />
+    </LinearLayout>
+
+    <!-- Terceira linha de botões -->
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout1">
+
+        <Button android:id="@+id/button41" style="@style/CalcButton" android:text="." />
+        <Button android:id="@+id/button42" style="@style/CalcButton" android:text="." />
+        <Button android:id="@+id/button44" style="@style/CalcButton" android:text="." />
+        <Button android:id="@+id/button45" style="@style/CalcButton" android:text="." />
+        <Button android:id="@+id/button46" style="@style/CalcButton" android:text="." />
+    </LinearLayout>
+
+    <!-- Resultado -->
+    <TextView
+        android:id="@+id/txvResultado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="#EEEEEE"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="RESULTADO"
+        android:textColor="#C62828"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2" />
+
+    <TextView
+        android:id="@+id/txvResultadoVI"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text=""
+        android:textColor="#C62828"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txvResultado" />
+
+    <!-- Memória -->
+    <TextView
+        android:id="@+id/txvMemoria"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="#EEEEEE"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="MEMÓRIA"
+        android:textColor="#C62828"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txvResultadoVI" />
+
+    <TextView
+        android:id="@+id/txvMemoriaVI"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text=""
+        android:textColor="#C62828"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txvMemoria" />
+
+    <!-- Botão Sair -->
+    <Button
+        android:id="@+id/btnSair"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#E91E63"
+        android:text="SAIR"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txvMemoriaVI" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
