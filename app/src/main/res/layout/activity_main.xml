@@ -120,11 +120,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearLayout1">
 
-        <Button android:id="@+id/button41" style="@style/CalcButton" android:text="." />
-        <Button android:id="@+id/button42" style="@style/CalcButton" android:text="." />
-        <Button android:id="@+id/button44" style="@style/CalcButton" android:text="." />
-        <Button android:id="@+id/button45" style="@style/CalcButton" android:text="." />
-        <Button android:id="@+id/button46" style="@style/CalcButton" android:text="." />
+        <Button
+            android:id="@+id/button45"
+            style="@style/CalcButton"
+            android:text="." />
+
+        <Button
+            android:id="@+id/button46"
+            style="@style/CalcButton"
+            android:text="." />
+
+        <Button
+            android:id="@+id/btnCelsiusToFah"
+            style="@style/CalcButton"
+            android:text="CF" />
+
+        <Button
+            android:id="@+id/btnFahToCelsius"
+            style="@style/CalcButton"
+            android:text="FC" />
+
+        <Button
+            android:id="@+id/btnPercentual"
+            style="@style/CalcButton"
+            android:text="%" />
+
     </LinearLayout>
 
     <!-- Resultado -->

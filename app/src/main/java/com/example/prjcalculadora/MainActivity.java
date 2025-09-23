@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     TextView txvResultado, txvResultadoVI, txvMemoria, txvMemoriaVI;
     Button btnSomar, btnSubtrair, btnMultiplicar, btnDividir, btnLimpar, btnSair, btnMemoriaHist;
     Button btnMemoMais, btnMemoMenos, btnMemoRec, btnMemoClear;
+    Button btnCelsiusToFah, btnFahToCelsius, btnPercentual;
 
     double vlMemoria = 0;
     double vlResultado = 0;
@@ -26,12 +27,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+        // Inputs e TextViews
         edtValor1 = findViewById(R.id.edtValor1);
         edtValor2 = findViewById(R.id.edtValor2);
         txvResultado = findViewById(R.id.txvResultado);
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         txvMemoria = findViewById(R.id.txvMemoria);
         txvMemoriaVI = findViewById(R.id.txvMemoriaVI);
 
+        // Botões básicos
         btnSomar = findViewById(R.id.btnSomar);
         btnSubtrair = findViewById(R.id.btnSubtrair);
         btnMultiplicar = findViewById(R.id.btnMultiplicar);
@@ -47,16 +51,24 @@ public class MainActivity extends AppCompatActivity {
         btnMemoriaHist = findViewById(R.id.btnMemoriaHist);
         btnSair = findViewById(R.id.btnSair);
 
+        // Botões de memória
         btnMemoMais = findViewById(R.id.btnMemoMais);
         btnMemoMenos = findViewById(R.id.btnMemoMenos);
         btnMemoRec = findViewById(R.id.btnMemoRec);
         btnMemoClear = findViewById(R.id.btnMemoClear);
 
+        // Novos botões CF, FC, %
+        btnCelsiusToFah = findViewById(R.id.btnCelsiusToFah);
+        btnFahToCelsius = findViewById(R.id.btnFahToCelsius);
+        btnPercentual = findViewById(R.id.btnPercentual);
+
+        // Inicialização de memória
         txvMemoria.setVisibility(TextView.INVISIBLE);
         txvMemoriaVI.setVisibility(TextView.INVISIBLE);
         btnMemoRec.setEnabled(false);
         btnMemoClear.setEnabled(false);
 
+        // Operações básicas
         btnSomar.setOnClickListener(v -> calcular("+"));
         btnSubtrair.setOnClickListener(v -> calcular("-"));
         btnMultiplicar.setOnClickListener(v -> calcular("*"));
@@ -65,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         btnMemoriaHist.setOnClickListener(v -> salvarMemoria());
         btnSair.setOnClickListener(v -> finish());
 
+        // Operações de memória
         btnMemoMais.setOnClickListener(v -> {
             vlMemoria += vlResultado;
             txvMemoria.setVisibility(TextView.VISIBLE);
@@ -83,9 +96,7 @@ public class MainActivity extends AppCompatActivity {
             txvMemoriaVI.setText(String.valueOf(vlMemoria));
         });
 
-        btnMemoRec.setOnClickListener(v -> {
-            edtValor1.setText(String.valueOf(vlMemoria));
-        });
+        btnMemoRec.setOnClickListener(v -> edtValor1.setText(String.valueOf(vlMemoria)));
 
         btnMemoClear.setOnClickListener(v -> {
             vlMemoria = 0;
@@ -94,13 +105,73 @@ public class MainActivity extends AppCompatActivity {
             btnMemoRec.setEnabled(false);
             btnMemoClear.setEnabled(false);
         });
+
+        // Conversão Celsius -> Fahrenheit (só V1, bloqueia se V2 tiver valor)
+        btnCelsiusToFah.setOnClickListener(v -> {
+            String v1 = edtValor1.getText().toString();
+            String v2 = edtValor2.getText().toString();
+
+            if (!v2.isEmpty()) {
+                txvResultadoVI.setText("Limpe V2 para usar CF");
+                return;
+            }
+            if (v1.isEmpty()) {
+                txvResultadoVI.setText("Informe V1");
+                return;
+            }
+            double celsius = Double.parseDouble(v1);
+            double fahrenheit = (celsius * 9 / 5) + 32;
+            vlResultado = fahrenheit;
+            txvResultadoVI.setText("C → F: " + String.format("%.2f", fahrenheit));
+        });
+
+        // Conversão Fahrenheit -> Celsius (só V1, bloqueia se V2 tiver valor)
+        btnFahToCelsius.setOnClickListener(v -> {
+            String v1 = edtValor1.getText().toString();
+            String v2 = edtValor2.getText().toString();
+
+            if (!v2.isEmpty()) {
+                txvResultadoVI.setText("Limpe V2 para usar FC");
+                return;
+            }
+            if (v1.isEmpty()) {
+                txvResultadoVI.setText("Informe V1");
+                return;
+            }
+            double fahrenheit = Double.parseDouble(v1);
+            double celsius = (fahrenheit - 32) * 5 / 9;
+            vlResultado = celsius;
+            txvResultadoVI.setText("F → C: " + String.format("%.2f", celsius));
+        });
+
+        // Percentual de V2 sobre V1
+        btnPercentual.setOnClickListener(v -> {
+            String v1 = edtValor1.getText().toString();
+            String v2 = edtValor2.getText().toString();
+
+            if (v1.isEmpty() || v2.isEmpty()) {
+                txvResultadoVI.setText("Informe V1 e V2");
+                return;
+            }
+            double n1 = Double.parseDouble(v1);
+            double n2 = Double.parseDouble(v2);
+
+            if (n1 == 0) {
+                txvResultadoVI.setText("Erro: V1 = 0");
+                return;
+            }
+
+            double resultado = (n2 / n1) * 100;
+            vlResultado = resultado;
+            txvResultadoVI.setText(String.format("%.2f%%", resultado));
+        });
     }
 
     private void calcular(String op) {
         String v1 = edtValor1.getText().toString();
         String v2 = edtValor2.getText().toString();
 
-        if(v1.isEmpty() || v2.isEmpty()) {
+        if (v1.isEmpty() || v2.isEmpty()) {
             txvResultadoVI.setText("Digite os dois valores!");
             return;
         }
@@ -114,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
             case "-": res = n1 - n2; break;
             case "*": res = n1 * n2; break;
             case "/":
-                if(n2 == 0) {
+                if (n2 == 0) {
                     txvResultadoVI.setText("Erro: divisão por zero");
                     return;
                 }
