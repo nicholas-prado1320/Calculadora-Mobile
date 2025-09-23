@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Inputs e TextViews
         edtValor1 = findViewById(R.id.edtValor1);
         edtValor2 = findViewById(R.id.edtValor2);
         txvResultado = findViewById(R.id.txvResultado);
@@ -42,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         txvMemoria = findViewById(R.id.txvMemoria);
         txvMemoriaVI = findViewById(R.id.txvMemoriaVI);
 
-        // Botões básicos
         btnSomar = findViewById(R.id.btnSomar);
         btnSubtrair = findViewById(R.id.btnSubtrair);
         btnMultiplicar = findViewById(R.id.btnMultiplicar);
@@ -51,24 +49,20 @@ public class MainActivity extends AppCompatActivity {
         btnMemoriaHist = findViewById(R.id.btnMemoriaHist);
         btnSair = findViewById(R.id.btnSair);
 
-        // Botões de memória
         btnMemoMais = findViewById(R.id.btnMemoMais);
         btnMemoMenos = findViewById(R.id.btnMemoMenos);
         btnMemoRec = findViewById(R.id.btnMemoRec);
         btnMemoClear = findViewById(R.id.btnMemoClear);
 
-        // Novos botões CF, FC, %
         btnCelsiusToFah = findViewById(R.id.btnCelsiusToFah);
         btnFahToCelsius = findViewById(R.id.btnFahToCelsius);
         btnPercentual = findViewById(R.id.btnPercentual);
 
-        // Inicialização de memória
         txvMemoria.setVisibility(TextView.INVISIBLE);
         txvMemoriaVI.setVisibility(TextView.INVISIBLE);
         btnMemoRec.setEnabled(false);
         btnMemoClear.setEnabled(false);
 
-        // Operações básicas
         btnSomar.setOnClickListener(v -> calcular("+"));
         btnSubtrair.setOnClickListener(v -> calcular("-"));
         btnMultiplicar.setOnClickListener(v -> calcular("*"));
@@ -77,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
         btnMemoriaHist.setOnClickListener(v -> salvarMemoria());
         btnSair.setOnClickListener(v -> finish());
 
-        // Operações de memória
         btnMemoMais.setOnClickListener(v -> {
             vlMemoria += vlResultado;
             txvMemoria.setVisibility(TextView.VISIBLE);
@@ -106,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
             btnMemoClear.setEnabled(false);
         });
 
-        // Conversão Celsius -> Fahrenheit (só V1, bloqueia se V2 tiver valor)
         btnCelsiusToFah.setOnClickListener(v -> {
             String v1 = edtValor1.getText().toString();
             String v2 = edtValor2.getText().toString();
@@ -122,10 +114,9 @@ public class MainActivity extends AppCompatActivity {
             double celsius = Double.parseDouble(v1);
             double fahrenheit = (celsius * 9 / 5) + 32;
             vlResultado = fahrenheit;
-            txvResultadoVI.setText("C → F: " + String.format("%.2f", fahrenheit));
+            txvResultadoVI.setText(String.format("%.2f", fahrenheit));
         });
 
-        // Conversão Fahrenheit -> Celsius (só V1, bloqueia se V2 tiver valor)
         btnFahToCelsius.setOnClickListener(v -> {
             String v1 = edtValor1.getText().toString();
             String v2 = edtValor2.getText().toString();
@@ -141,10 +132,9 @@ public class MainActivity extends AppCompatActivity {
             double fahrenheit = Double.parseDouble(v1);
             double celsius = (fahrenheit - 32) * 5 / 9;
             vlResultado = celsius;
-            txvResultadoVI.setText("F → C: " + String.format("%.2f", celsius));
+            txvResultadoVI.setText(String.format("%.2f", celsius));
         });
 
-        // Percentual de V2 sobre V1
         btnPercentual.setOnClickListener(v -> {
             String v1 = edtValor1.getText().toString();
             String v2 = edtValor2.getText().toString();
